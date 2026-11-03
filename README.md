@@ -2,7 +2,7 @@
 
 A dark theme for Omarchy, built on the T1 palette in its dark steps.
 
-![The dark desktop with the horizon wallpaper](preview.png)
+![T2 Dark on its horizon wallpaper](preview.png)
 
 - **What it is:** a dark theme for Omarchy, the Arch Linux desktop.
 - **What it does:** paints the shell, the bar, the launcher, the notifications and the terminals in warm near-black with a steel-blue accent. Without it the screen glares in a dark room.
@@ -37,7 +37,7 @@ To keep a frozen copy instead, download the archive, unpack it into `~/.config/o
 | `backgrounds/`, `alt-backgrounds/` | The wallpapers the theme offers. |
 | `custom_theme.json` | The same palette in the theme editor's format. |
 | `waybar.css`, `mako.ini`, `walker.css`, `swayosd.css` | The bar, the notifications, the launcher and the volume overlay. |
-| `preview.png` | The picture above. |
+| `preview.png` | A composition of these surfaces on the shipped wallpaper, not a screen capture. |
 
 ## Docs
 
