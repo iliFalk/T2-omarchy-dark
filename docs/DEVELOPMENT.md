@@ -90,9 +90,14 @@ swap, where the red slot held a teal.
 - `backgrounds/ascii-art.png` — coloured ASCII halftone flow
 - `alt-backgrounds/` — the alternates that came with the theme
 
-The horizon wallpaper is still graded to the older Oxocarbon steps: its ground reads `#0D0D0D` and its
-glow `#3DB3F8`. The palette now sits on `#1A1A18` and `#4694EA`, so the picture is a few units off the
-bar and the borders. A regrade is a separate change.
+Both wallpapers are graded to the palette endpoints: ground `#1A1A18`, glow `#4694EA`. The regrade keeps
+each pixel's mix factor, so the tone curve of the source is untouched.
+
+- `backgrounds/1-horisont.png` came from `#0D0D0D` and `#3DB3F8`.
+- `backgrounds/oxcarbondark-omarchy.png`, the hero image of the original theme, came from `#161616` and
+  `#33B1FF`.
+
+The alternate wallpapers (`BG*`) are original artwork. Their colours are their own.
 
 Cycle through the theme backgrounds with `omarchy-theme-bg-next`.
 
