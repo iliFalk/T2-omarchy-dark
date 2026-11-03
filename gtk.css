@@ -1,21 +1,21 @@
-    @define-color background     #161616;
-    @define-color foreground     #f2f4f8;
-    @define-color black          #161616;
-    @define-color red            #3ddbd9;
-    @define-color green          #33b1ff;
-    @define-color yellow         #ee5396;
-    @define-color blue           #42be65;
-    @define-color magenta        #be95ff;
-    @define-color cyan           #ff7eb6;
-    @define-color white          #f2f4f8;
-    @define-color bright_black   #525252;
-    @define-color bright_red     #78a9ff;
-    @define-color bright_green   #262626;
-    @define-color bright_yellow  #393939;
-    @define-color bright_blue    #dde1e6;
-    @define-color bright_magenta #ffffff;
-    @define-color bright_cyan    #82cfff;
-    @define-color bright_white   #08bdba;
+    @define-color background     #1A1A18;
+    @define-color foreground     #F0EDE5;
+    @define-color black          #333331;
+    @define-color red            #EF664D;
+    @define-color green          #4AA172;
+    @define-color yellow         #B48A3C;
+    @define-color blue           #4694EA;
+    @define-color magenta        #A775FF;
+    @define-color cyan           #539D9C;
+    @define-color white          #F0EDE5;
+    @define-color bright_black   #B4B3AE;
+    @define-color bright_red     #FF9B9A;
+    @define-color bright_green   #7EC59E;
+    @define-color bright_yellow  #D5B26C;
+    @define-color bright_blue    #79BBFF;
+    @define-color bright_magenta #D4A2FF;
+    @define-color bright_cyan    #77C1D6;
+    @define-color bright_white   #F0EDE5;
 
     @define-color accent_bg_color @blue;
     @define-color accent_fg_color @background;
@@ -159,8 +159,3 @@
         color: @background;
         background-color: @red;
     }
-
-    /* .svg-icon {
-        filter: invert(79%) sepia(18%) saturate(611%) hue-rotate(192deg)
-            brightness(103%) contrast(94%);
-    } */

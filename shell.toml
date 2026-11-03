@@ -1,44 +1,42 @@
-# Omarchy Quattro surfaces for Oxocarbon.
-# The shell carries forward the original Walker, Mako, SwayOSD, Hyprlock,
-# and Waybar color roles while all legacy theme files remain available.
+# Omarchy Quattro surfaces — T2 Dark.
 
 [bar]
-background = "#262626"
+background = "#262624"
 background-alpha = 0.97
-text = "#F2F4F8"
-active = "#42BE65"
+text = "#F0EDE5"
+active = "#EF664D"
 scale-with-font = true
 size-horizontal = 26
 size-vertical = 28
 
 [hyprland]
-active-border = "#8A8A8D"
-active-border-foreground = "#F2F4F8"
+active-border = "#4694EA"
+active-border-foreground = "#F0EDE5"
 
 [controls]
-normal-color = "#F2F4F8"
+normal-color = "#F0EDE5"
 normal-fill-alpha = 0.04
 normal-border-width = 1
 normal-border-alpha = 0.30
 
-hover-cursor-color = "#33B1FF"
+hover-cursor-color = "#4694EA"
 hover-cursor-fill-alpha = 0.10
 hover-cursor-border-width = 1
 hover-cursor-border-alpha = 0.48
 
-focus-color = "#EE5396"
+focus-color = "#4694EA"
 focus-fill-alpha = 0.12
 focus-border-width = 1
 focus-border-alpha = 0.82
 
-selected-color = "#33B1FF"
+selected-color = "#4694EA"
 selected-fill-alpha = 0.18
 selected-border-width = 1
 selected-border-alpha = 0.58
 
-pressed-color = "#BE95FF"
+pressed-color = "#5AA8FF"
 pressed-fill-alpha = 0.24
-selection-color = "#33B1FF"
+selection-color = "#4694EA"
 selection-fill-alpha = 0.35
 
 [spacing]
@@ -55,94 +53,94 @@ heading = 16
 icon-large = 18
 
 [popups]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.97
-text = "#EE5396"
+text = "#F0EDE5"
 border = "hyprland.active-border"
 border-alpha = 1.0
 border-width = 4
 
 [tooltip]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.97
-text = "#F2F4F8"
-border = "#363636"
+text = "#F0EDE5"
+border = "#41413E"
 border-alpha = 1.0
 border-width = 1
 
 [notifications]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.97
-text = "#F2F4F8"
+text = "#F0EDE5"
 border = "hyprland.active-border"
 border-alpha = 1.0
 border-width = 4
-countdown = "#EE5396"
+countdown = "#EF664D"
 
 [launcher]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.98
-text = "#F2F4F8"
+text = "#F0EDE5"
 border = "hyprland.active-border"
 border-alpha = 1.0
 border-width = 6
-scrim = "#161616"
-scrim-alpha = 0.0
-selected-background = "#161616"
+scrim = "#0E0E0D"
+scrim-alpha = 0.4
+selected-background = "#1A1A18"
 selected-background-alpha = 1.0
-selected-text = "#33B1FF"
-selected-border = "#EE5396"
+selected-text = "#4694EA"
+selected-border = "#4694EA"
 selected-border-alpha = 1.0
 selected-border-width = 1
 
 [menu]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.98
-text = "#F2F4F8"
+text = "#F0EDE5"
 border = "hyprland.active-border"
 border-alpha = 1.0
 border-width = 5
-scrim = "#161616"
-scrim-alpha = 0.0
-selected-background = "#161616"
+scrim = "#0E0E0D"
+scrim-alpha = 0.4
+selected-background = "#1A1A18"
 selected-background-alpha = 1.0
-selected-text = "#33B1FF"
-selected-border = "#EE5396"
+selected-text = "#4694EA"
+selected-border = "#4694EA"
 selected-border-alpha = 1.0
 selected-border-width = 1
 
 [polkit]
-background = "#161616"
+background = "#333331"
 background-alpha = 0.97
-text = "#F2F4F8"
-text-error = "#EE5396"
+text = "#F0EDE5"
+text-error = "#EE9E93"
 border = "hyprland.active-border"
-border-error = "#EE5396"
+border-error = "#EF664D"
 border-alpha = 1.0
 border-width = 6
-scrim = "#161616"
-scrim-alpha = 0.5
-accent = "#33B1FF"
+scrim = "#0E0E0D"
+scrim-alpha = 0.4
+accent = "#4694EA"
 
 [lock]
-background = "#161616"
-background-alpha = 0.78
-text = "#F2F4F8"
-placeholder = "#F2F4F8B3"
-text-error = "#EE5396"
+background = "#1A1A18"
+background-alpha = 0.80
+text = "#F0EDE5"
+placeholder = "#989894B3"
+text-error = "#EE9E93"
 border = "hyprland.active-border"
 border-active = "hyprland.active-border"
-border-error = "#EE5396"
+border-error = "#EF664D"
 border-alpha = 1.0
 border-width = 5
-selection = "#33B1FF"
+selection = "#4694EA"
 selection-alpha = 0.45
 
 [image-picker]
-scrim = "#161616"
-scrim-alpha = 0.5
-text = "#F2F4F8"
-selected-border = "#33B1FF"
+scrim = "#0E0E0D"
+scrim-alpha = 0.4
+text = "#1A1A18"
+selected-border = "#4694EA"
 selected-border-alpha = 1.0
-unselected-border = "#8A8A8D"
-unselected-border-alpha = 0.35
+unselected-border = "#41413E"
+unselected-border-alpha = 0.6

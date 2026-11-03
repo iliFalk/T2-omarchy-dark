@@ -1,8 +1,7 @@
 /* ────────────────────────────────────────────────────────────
- * Custom Theme for Waybar
- * Made with Omarchist
+ * Waybar — T2 Dark
  * ────────────────────────────────────────────────────────────
  */
 
-@define-color background #262626;
-@define-color foreground #f2f4f8;
+@define-color background #262624;
+@define-color foreground #F0EDE5;

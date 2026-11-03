@@ -1,14 +1,13 @@
 /* ────────────────────────────────────────────────────────────
- * Custom Theme for SwayOSD
- * Made with Omarchist
+ * SwayOSD — T2 Dark
  * ────────────────────────────────────────────────────────────
  */
 
-@define-color background-color #161616;
-@define-color border-color #363636;
-@define-color label #ee5396;
-@define-color image #33b1ff;
-@define-color progress #ee5396;
+@define-color background-color #333331;
+@define-color border-color #41413E;
+@define-color label #F0EDE5;
+@define-color image #4694EA;
+@define-color progress #4694EA;
 
 
 /* Cancel out Omarchy settings */
@@ -31,6 +30,6 @@ window:backdrop #container {
     background-color: @background-color;
     padding: 12px;
     background-clip: padding-box;
-    box-shadow: 2px 2px 9px 0px rgba(22, 22, 22, 1);
+    box-shadow: 2px 2px 9px 0px rgba(0, 0, 0, 0.18);
 
 }

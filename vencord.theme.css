@@ -8,22 +8,22 @@
    
 
     :root {
-        --color00: #161616;
-        --color01: #1c1c1c;
-        --color02: #393939;
-        --color03: #525252;
-        --color04: #08bdba;
-        --color05: #f2f4f8;
-        --color06: #42be65;
-        --color07: #33b1ff;
-        --color08: #3ddbd9;
-        --color09: #ee5396;
-        --color10: #33b1ff;
-        --color11: #ee5396;
-        --color12: #ff7eb6;
-        --color13: #33b1ff;
-        --color14: #be95ff;
-        --color15: #ee5396;
+        --color00: #1A1A18;
+        --color01: #262624;
+        --color02: #41413E;
+        --color03: #C5C3BE;
+        --color04: #B4B3AE;
+        --color05: #F0EDE5;
+        --color06: #1A1A18;
+        --color07: #F0EDE5;
+        --color08: #EF664D;
+        --color09: #D27B4B;
+        --color10: #B48A3C;
+        --color11: #4AA172;
+        --color12: #539D9C;
+        --color13: #4694EA;
+        --color14: #A775FF;
+        --color15: #A98B73;
  --base00: var(--color00);
     --base01: var(--color01);
     --base02: var(--color02);
@@ -648,7 +648,7 @@ div[class*="numberBadge"] {
   right: 0;
   bottom: 0;
   width: 1px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(51,51,49,0.05);
   transform: scaleX(0.5);
   transform-origin: right;
   pointer-events: none;
