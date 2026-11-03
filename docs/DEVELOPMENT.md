@@ -101,12 +101,19 @@ The alternate wallpapers (`BG*`) are original artwork. Their colours are their o
 
 ### Motion in the wallpaper
 
-The horizon wallpapers are long exposures: every point of light carries a 380-pixel trail along x,
-with a full-brightness head and a linear tail, and the limb is softened by 1.2 px.
+The viewpoint flies forward. The wallpaper is a radial exposure around a vanishing point at 0.50 of
+the width and 0.62 of the height, just above the limb: each step back in time samples the frame closer
+to that point, and the samples stack with a head at the present position and a tail toward the past.
+Stars therefore streak away from the vanishing point, longer toward the edges, and the planet is
+pushed 12 % closer so the limb reads as approaching.
 
-The limb itself is not smeared, and that is deliberate. It already sits at the palette's full accent
-along its whole length, so blurring it along its own direction changes nothing, and a brighter head
-would leave the palette. Giving the planet visible motion needs new content on the limb, not a filter.
+The whole effect runs on `t`, the mix factor of the ground-to-accent segment, not on RGB. A trail
+computed in RGB drags each pixel off the palette — measured at 24 units of residual against the
+segment. Working on `t` keeps every pixel on it: the residual stays at 8.5 units, as before the change.
+
+One limit is worth knowing. The limb already sits at the palette's full accent along its whole length,
+so it cannot be made brighter, and a blur along its own direction changes nothing. The approach cue
+comes from scale, not from a smear.
 
 
 Cycle through the theme backgrounds with `omarchy-theme-bg-next`.
