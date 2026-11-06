@@ -115,6 +115,35 @@ One limit is worth knowing. The limb already sits at the palette's full accent a
 so it cannot be made brighter, and a blur along its own direction changes nothing. The approach cue
 comes from scale, not from a smear.
 
+### Theme intro clip
+
+Omarchy 4.5 plays a short clip when a theme is applied. The clip sits next to the wallpaper it
+belongs to, in `backgrounds/intros/`, and carries the same name: `1-horisont.png` pairs with
+`1-horisont.mp4`. OWE plays the clip, then the shell shows the still.
+
+The clip runs six seconds at 2560×1440 and 24 frames per second. Two things move. The star field
+starts at 0.55 of its final radius around the vanishing point, so the stars sit near the point on
+short streaks, then stream outward and lengthen. The limb highlight slides 2.5 degrees about the
+planet's centre, so the planet turns. Both effects decay to nothing.
+
+The last frame equals `backgrounds/1-horisont.png` at 2560×1440 bit for bit, so the swap from video
+to still shows no jump. `tools/render-intro.py` renders the frames from the shipped wallpaper, using
+only Pillow and NumPy:
+
+    python3 tools/render-intro.py --themes T2 --bg backgrounds --width 2560 --height 1440 \
+      --frames 144 --growth0 0.55 --turn -2.5 --out /tmp/intro-frames
+
+Then encode the frames:
+
+    ffmpeg -framerate 24 -i /tmp/intro-frames/T2/f%04d.png -c:v libx264 -profile:v high \
+      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/1-horisont.mp4
+
+The limb geometry in the script (`GEOMETRY`) is measured on this wallpaper. A different wallpaper
+needs a new circle fit: the limb's upper edge, its centre and its radius in 6016×3384 coordinates.
+
+Turn the intros off with `omarchy theme bg intro disable`, or turn all animations off under
+Appearance > Animations.
+
 
 Cycle through the theme backgrounds with `omarchy-theme-bg-next`.
 

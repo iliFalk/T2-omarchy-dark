@@ -28,6 +28,7 @@ To keep a frozen copy instead, download the archive, unpack it into `~/.config/o
 | Terminal | Alacritty, Ghostty, Kitty and Foot take the T1 colors on the warm near-black ground. |
 | Backgrounds | `backgrounds/` holds the horizon wallpaper, `alt-backgrounds/` the alternates. |
 | `omarchy-theme-bg-next` | Cycles through the theme backgrounds. |
+| Theme switch | `backgrounds/intros/1-horisont.mp4` plays a six-second flight into the wallpaper, then the still takes over. `omarchy theme bg intro disable` turns it off. |
 
 ## Settings
 
