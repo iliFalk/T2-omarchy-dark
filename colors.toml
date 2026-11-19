@@ -40,6 +40,9 @@ bright_blue = "#79BBFF"
 bright_magenta = "#D4A2FF"
 bright_cyan = "#77C1D6"
 
+# Brand colors
+nvidia_green = "#76B900"
+
 # Hyprland window borders
 hyprland_active_border = "rgb(4694EA)"
 hyprland_inactive_border = "rgb(41413E)"
