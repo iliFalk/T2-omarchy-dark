@@ -86,18 +86,11 @@ swap, where the red slot held a teal.
 
 ## Backgrounds
 
-- `backgrounds/1-horisont.png` — horizon wallpaper, native 6016×3384
-- `backgrounds/ascii-art.png` — coloured ASCII halftone flow
-- `alt-backgrounds/` — the alternates that came with the theme
+- `backgrounds/1-horisont.png` — horizon wallpaper, native 6016×3384. The theme ships one wallpaper.
 
-Both wallpapers are graded to the palette endpoints: ground `#1A1A18`, glow `#4694EA`. The regrade keeps
-each pixel's mix factor, so the tone curve of the source is untouched.
-
-- `backgrounds/1-horisont.png` came from `#0D0D0D` and `#3DB3F8`.
-- `backgrounds/oxcarbondark-omarchy.png`, the hero image of the original theme, came from `#161616` and
-  `#33B1FF`.
-
-The alternate wallpapers (`BG*`) are original artwork. Their colours are their own.
+The wallpaper is graded to the palette endpoints: ground `#1A1A18`, glow `#4694EA`. The regrade keeps
+each pixel's mix factor, so the tone curve of the source is untouched. It came from `#0D0D0D` and
+`#3DB3F8`.
 
 ### Motion in the wallpaper
 
@@ -121,31 +114,39 @@ Omarchy 4.5 plays a short clip when a theme is applied. The clip sits next to th
 belongs to, in `backgrounds/intros/`, and carries the same name: `1-horisont.png` pairs with
 `1-horisont.mp4`. OWE plays the clip, then the shell shows the still.
 
-The clip runs six seconds at 2560×1440 and 24 frames per second. Two things move. The star field
-starts at 0.55 of its final radius around the vanishing point, so the stars sit near the point on
-short streaks, then stream outward and lengthen. The limb highlight slides 2.5 degrees about the
-planet's centre, so the planet turns. Both effects decay to nothing.
+The shipped clip is generated, not rendered from the still: a forward flight through a star field,
+with the limb pulsing. It runs 5.04 s at 2560×1440 and 24 frames per second, silent, h264 high,
+yuv420p.
+
+A generated clip drifts off the still it was made from. On this source the last frame sat 11 % larger
+about the vanishing point, with the limb 20 px lower at 1080p, which reads as a hop when OWE swaps to
+the wallpaper. `tools/merge-intro.py` removes the drift: it resamples every frame with the one
+similarity that maps the last frame onto the still, extends the source where the widened field of
+view runs past the frame, and blends the last 0.5 s into the still.
+
+    python3 tools/merge-intro.py --src <generated clip>.mp4 \
+      --wallpaper backgrounds/1-horisont.png --out /tmp/merged \
+      --width 2560 --height 1440 --fps 24 \
+      --scale 0.898 --tx -1.3333 --ty -6.6667 --vp 0.50,0.62 --settle 0.5
+
+    ffmpeg -framerate 24 -i /tmp/merged/%03d.png -c:v libx264 -profile:v high \
+      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/1-horisont.mp4
 
 The last frame equals `backgrounds/1-horisont.png` at 2560×1440 bit for bit, so the swap from video
-to still shows no jump. `tools/render-intro.py` renders the frames from the shipped wallpaper, using
-only Pillow and NumPy:
+to still shows no jump. The constants are fitted on this source: a different clip needs a new fit, or
+the swap hops.
+
+`tools/render-intro.py` stays for a still-derived clip. It renders the star field and the limb
+rotation out of the wallpaper alone, with the same contract on the last frame:
 
     python3 tools/render-intro.py --themes T2 --bg backgrounds --width 2560 --height 1440 \
       --frames 144 --growth0 0.55 --turn -2.5 --out /tmp/intro-frames
 
-Then encode the frames:
-
-    ffmpeg -framerate 24 -i /tmp/intro-frames/T2/f%04d.png -c:v libx264 -profile:v high \
-      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/1-horisont.mp4
-
-The limb geometry in the script (`GEOMETRY`) is measured on this wallpaper. A different wallpaper
+The limb geometry in that script (`GEOMETRY`) is measured on this wallpaper. A different wallpaper
 needs a new circle fit: the limb's upper edge, its centre and its radius in 6016×3384 coordinates.
 
 Turn the intros off with `omarchy theme bg intro disable`, or turn all animations off under
 Appearance > Animations.
-
-
-Cycle through the theme backgrounds with `omarchy-theme-bg-next`.
 
 ### Note on Omarchy's git-theme policy
 

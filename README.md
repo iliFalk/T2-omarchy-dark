@@ -26,21 +26,20 @@ To keep a frozen copy instead, download the archive, unpack it into `~/.config/o
 |---|---|
 | Theme menu | `t2-omarchy-dark` applies the palette to the shell, the bar, the launcher and the notifications. |
 | Terminal | Alacritty, Ghostty, Kitty and Foot take the T1 colors on the warm near-black ground. |
-| Backgrounds | `backgrounds/` holds the horizon wallpaper, `alt-backgrounds/` the alternates. |
-| `omarchy-theme-bg-next` | Cycles through the theme backgrounds. |
-| Theme switch | `backgrounds/intros/1-horisont.mp4` plays a six-second flight into the wallpaper, then the still takes over. `omarchy theme bg intro disable` turns it off. |
+| Backgrounds | `backgrounds/` holds one wallpaper: the horizon. |
+| Theme switch | `backgrounds/intros/1-horisont.mp4` plays a five-second flight into the wallpaper, then the still takes over. `omarchy theme bg intro disable` turns it off. |
 
 ## Settings
 
 | File | Holds |
 |---|---|
 | `colors.toml` | The palette. Every other file derives from it. |
-| `backgrounds/`, `alt-backgrounds/` | The wallpapers the theme offers. |
+| `backgrounds/` | The wallpaper and its intro clip. |
 | `custom_theme.json` | The same palette in the theme editor's format. |
 | `waybar.css`, `mako.ini`, `walker.css`, `swayosd.css` | The bar, the notifications, the launcher and the volume overlay. |
 | `preview.png` | A composition of these surfaces on the shipped wallpaper, not a screen capture. |
 
 ## Docs
 
-- `docs/DEVELOPMENT.md` — the palette table, the terminal slots, how the steps follow the light palette, the backgrounds and the credits.
+- `docs/DEVELOPMENT.md` — the palette table, the terminal slots, how the steps follow the light palette, the wallpaper and the credits.
 - `LICENSE` — MIT.
