@@ -24,17 +24,24 @@ This script removes that drift and lands the clip on the still:
 The last frame then equals the wallpaper bit for bit; the frames before it
 differ by a fading residue instead of a step.
 
+The clip also has to fill the screen, not a 16:9 frame: a 16:9 video on a 3:2
+panel plays with black bars, while the shell crops the wallpaper to fill.
+`--src-crop` and `--wallpaper-crop` cut both to the screen aspect before they
+are scaled to the output size, so the crop is the same in the clip and in the
+still and the stretch stays uniform.
+
 Measure the constants first (fit scale + translation that minimises the mean
 absolute difference between the clip's last frame and the wallpaper at the
 output size). Guessed constants give a visible hop.
 
     python3 tools/merge-intro.py --src /tmp/source.mp4 \\
       --wallpaper backgrounds/1-horisont.png --out /tmp/merged \\
-      --width 2560 --height 1440 --fps 24 \\
-      --scale 0.898 --tx -1.3333 --ty -6.6667 --vp 0.50,0.62 --settle 0.5
+      --width 3024 --height 1964 --fps 24 \\
+      --src-crop 1664:1080:128:0 --wallpaper-crop 5210:3384:403:0 \\
+      --scale 0.934 --tx 2 --ty -22 --vp 0.50,0.62 --settle 0.5
 
     ffmpeg -framerate 24 -i /tmp/merged/%03d.png -c:v libx264 -profile:v high \\
-      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/horisont.mp4
+      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/1-horisont.mp4
 
 Needs Pillow and NumPy; ffmpeg for the extraction.
 """
@@ -48,13 +55,14 @@ import numpy as np
 from PIL import Image
 
 
-def extract(src, out_dir, width, height, fps):
+def extract(src, out_dir, width, height, fps, crop=""):
     os.makedirs(out_dir, exist_ok=True)
     for old in glob.glob(os.path.join(out_dir, "*.png")):
         os.remove(old)
+    vf = f"crop={crop},scale={width}:{height}:flags=lanczos" if crop \
+        else f"scale={width}:{height}:flags=lanczos"
     subprocess.run(
-        ["ffmpeg", "-v", "error", "-y", "-i", src,
-         "-vf", f"scale={width}:{height}:flags=lanczos", "-vsync", "0",
+        ["ffmpeg", "-v", "error", "-y", "-i", src, "-vf", vf, "-vsync", "0",
          os.path.join(out_dir, "%03d.png")],
         check=True)
     frames = sorted(glob.glob(os.path.join(out_dir, "*.png")))
@@ -83,13 +91,17 @@ def main():
     ap.add_argument("--out", required=True, help="directory for the merged frames")
     ap.add_argument("--frames-dir", default="/tmp/merge-intro-src",
                     help="scratch directory for the extracted frames")
-    ap.add_argument("--width", type=int, default=2560)
-    ap.add_argument("--height", type=int, default=1440)
+    ap.add_argument("--width", type=int, default=3024)
+    ap.add_argument("--height", type=int, default=1964)
     ap.add_argument("--fps", type=int, default=24)
-    ap.add_argument("--scale", type=float, default=0.898,
+    ap.add_argument("--src-crop", default="1664:1080:128:0",
+                    help="crop of the source clip, before the scale to the output size")
+    ap.add_argument("--wallpaper-crop", default="5210:3384:403:0",
+                    help="the same aspect crop of the wallpaper, centered")
+    ap.add_argument("--scale", type=float, default=0.934,
                     help="sampling scale about the vanishing point (fitted)")
-    ap.add_argument("--tx", type=float, default=-1.3333, help="x translation, output px")
-    ap.add_argument("--ty", type=float, default=-6.6667, help="y translation, output px")
+    ap.add_argument("--tx", type=float, default=2.0, help="x translation, output px")
+    ap.add_argument("--ty", type=float, default=-22.0, help="y translation, output px")
     ap.add_argument("--vp", default="0.50,0.62", help="vanishing point as fractions of w,h")
     ap.add_argument("--settle", type=float, default=0.5,
                     help="seconds of the closing blend into the still")
@@ -102,13 +114,16 @@ def main():
     vpx, vpy = (float(v) for v in args.vp.split(","))
     cx, cy = vpx * W, vpy * H
 
-    frames = extract(args.src, args.frames_dir, W, H, args.fps)
+    frames = extract(args.src, args.frames_dir, W, H, args.fps, args.src_crop)
     os.makedirs(args.out, exist_ok=True)
     for old in glob.glob(os.path.join(args.out, "*.png")):
         os.remove(old)
 
-    still = np.asarray(Image.open(args.wallpaper).convert("RGB")
-                       .resize((W, H), Image.LANCZOS)).astype(np.float32)
+    still_im = Image.open(args.wallpaper).convert("RGB")
+    if args.wallpaper_crop:
+        box = tuple(int(v) for v in args.wallpaper_crop.split(":"))
+        still_im = still_im.crop((box[2], box[3], box[2] + box[0], box[3] + box[1]))
+    still = np.asarray(still_im.resize((W, H), Image.LANCZOS)).astype(np.float32)
 
     Tx = Ty = args.pad
     xs = (np.arange(W, dtype=np.float32) - cx - tx) / s + cx

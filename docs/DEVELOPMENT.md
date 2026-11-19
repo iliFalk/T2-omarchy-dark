@@ -115,31 +115,38 @@ belongs to, in `backgrounds/intros/`, and carries the same name: `1-horisont.png
 `1-horisont.mp4`. OWE plays the clip, then the shell shows the still.
 
 The shipped clip is generated, not rendered from the still: a forward flight through a star field,
-with the limb pulsing. It runs 5.04 s at 2560×1440 and 24 frames per second, silent, h264 high,
+with the limb pulsing. It runs 5.04 s at 3024×1964 and 24 frames per second, silent, h264 high,
 yuv420p.
 
-A generated clip drifts off the still it was made from. On this source the last frame sat 11 % larger
-about the vanishing point, with the limb 20 px lower at 1080p, which reads as a hop when OWE swaps to
-the wallpaper. `tools/merge-intro.py` removes the drift: it resamples every frame with the one
-similarity that maps the last frame onto the still, extends the source where the widened field of
-view runs past the frame, and blends the last 0.5 s into the still.
+The clip fills the screen, and the screen is 3:2. A 16:9 clip plays with black bars there, while the
+shell crops the wallpaper to fill. So both are cut to the screen aspect before the scale: the 1920×1080
+source loses 128 px at each side, the 6016×3384 wallpaper loses 403 px at each side, and both are
+stretched to 3024×1964. The crop matches on both, so the stretch stays uniform and the limb keeps its
+circle.
+
+A generated clip also drifts off the still it was made from. On this source the last frame sat 7 %
+larger about the vanishing point, with the limb 52 px lower at 3024×1964, which reads as a hop when
+OWE swaps to the wallpaper. `tools/merge-intro.py` removes the drift: it crops, resamples every frame
+with the one similarity that maps the last frame onto the still, extends the source where the widened
+field of view runs past the frame, and blends the last 0.5 s into the still.
 
     python3 tools/merge-intro.py --src <generated clip>.mp4 \
       --wallpaper backgrounds/1-horisont.png --out /tmp/merged \
-      --width 2560 --height 1440 --fps 24 \
-      --scale 0.898 --tx -1.3333 --ty -6.6667 --vp 0.50,0.62 --settle 0.5
+      --width 3024 --height 1964 --fps 24 \
+      --src-crop 1664:1080:128:0 --wallpaper-crop 5210:3384:403:0 \
+      --scale 0.934 --tx 2 --ty -22 --vp 0.50,0.62 --settle 0.5
 
     ffmpeg -framerate 24 -i /tmp/merged/%03d.png -c:v libx264 -profile:v high \
-      -pix_fmt yuv420p -crf 18 -movflags +faststart backgrounds/intros/1-horisont.mp4
+      -pix_fmt yuv420p -crf 20 -movflags +faststart backgrounds/intros/1-horisont.mp4
 
-The last frame equals `backgrounds/1-horisont.png` at 2560×1440 bit for bit, so the swap from video
-to still shows no jump. The constants are fitted on this source: a different clip needs a new fit, or
-the swap hops.
+The last frame equals `backgrounds/1-horisont.png` cut to the screen aspect and scaled to 3024×1964
+bit for bit, so the swap from video to still shows no jump on that screen. Another screen aspect or
+another source clip needs a new crop and a new fit, or the swap hops.
 
 `tools/render-intro.py` stays for a still-derived clip. It renders the star field and the limb
 rotation out of the wallpaper alone, with the same contract on the last frame:
 
-    python3 tools/render-intro.py --themes T2 --bg backgrounds --width 2560 --height 1440 \
+    python3 tools/render-intro.py --themes T2 --bg backgrounds --width 3024 --height 1964 \
       --frames 144 --growth0 0.55 --turn -2.5 --out /tmp/intro-frames
 
 The limb geometry in that script (`GEOMETRY`) is measured on this wallpaper. A different wallpaper
