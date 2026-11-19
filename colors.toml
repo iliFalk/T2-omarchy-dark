@@ -44,7 +44,7 @@ bright_cyan = "#77C1D6"
 nvidia_green = "#76B900"
 
 # Hyprland window borders
-hyprland_active_border = "rgb(4694EA)"
+hyprland_active_border = "rgb(76B900)"
 hyprland_inactive_border = "rgb(41413E)"
 
 # Cursor and selection
